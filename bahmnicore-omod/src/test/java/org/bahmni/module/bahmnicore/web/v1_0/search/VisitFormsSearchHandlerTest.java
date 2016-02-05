@@ -15,28 +15,32 @@ import org.openmrs.module.webservices.rest.web.resource.impl.NeedsPaging;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-
 import javax.servlet.http.HttpServletRequest;
-
 import java.util.*;
-
+import org.mockito.Mock;
+import org.openmrs.Patient;
+import org.openmrs.module.webservices.rest.web.RequestContext;
+import org.openmrs.module.webservices.rest.web.resource.api.SearchConfig;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
+import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 @PrepareForTest(Context.class)
 @RunWith(PowerMockRunner.class)
+
 public class VisitFormsSearchHandlerTest {
 
     private VisitFormsSearchHandler visitFormsSearchHandler;
     @Mock
     RequestContext context;
-
     @Mock
     PatientService patientService;
     @Mock
@@ -54,6 +58,7 @@ public class VisitFormsSearchHandlerTest {
     Concept concept;
     Visit visit;
     Obs obs;
+
 
     @Before
     public void before() {
@@ -77,6 +82,7 @@ public class VisitFormsSearchHandlerTest {
     }
 
     @Test
+
     public void shouldReturnConceptSpecificObsIfConceptNameIsSpecified() throws Exception {
         HttpServletRequest req = Mockito.mock(HttpServletRequest.class);
         when(context.getLimit()).thenReturn(1);
