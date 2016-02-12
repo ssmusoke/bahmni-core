@@ -30,7 +30,7 @@ public interface OrderDao {
 
     List<Order> getOrdersForVisitUuid(String visitUuid, String orderTypeUuid);
 
-    List<Order> getAllOrders(Patient patientByUuid, OrderType drugOrderTypeUuid, Set<Concept> conceptsForDrugs, Date startDate, Date endDate, Set<Concept> drugConceptsToBeExcluded);
+    List<Order> getAllOrders(Patient patientByUuid, OrderType drugOrderTypeUuid, Set<Concept> conceptsForDrugs, Set<Concept> drugConceptsToBeExcluded);
 
     Map<String,DrugOrder> getDiscontinuedDrugOrders(List<DrugOrder> drugOrders);
 
@@ -39,4 +39,6 @@ public interface OrderDao {
     List<Order> getInactiveOrders(Patient patient, OrderType orderTypeByName, CareSetting careSettingByName, Date asOfDate, Set<Concept> concepts, Set<Concept> drugConceptsToBeExcluded);
 
     Order getChildOrder(Order order);
+
+    List<Order> getOrdersByPatientProgram(String patientProgramUuid, OrderType orderTypeByUuid, Set<Concept> conceptsForDrugs);
 }

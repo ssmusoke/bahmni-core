@@ -118,7 +118,7 @@ public class BahmniDrugOrderController extends BaseRestController {
         List<DrugOrder> drugOrders = new ArrayList<>();
 
         if (isActive == null) {
-            List<Order> orders = drugOrderService.getAllDrugOrders(patientUuid, drugConceptsToBeFiltered, null, null, drugConceptsToBeExcluded);
+            List<Order> orders = drugOrderService.getAllDrugOrders(patientUuid, null, drugConceptsToBeFiltered, drugConceptsToBeExcluded);
             for (Order order : orders) {
                 drugOrders.add((DrugOrder) order);
             }

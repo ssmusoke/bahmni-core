@@ -349,6 +349,20 @@ public class OrderDaoImplIT extends BaseIntegrationTest {
         Assert.assertEquals(actual, childOrder);
     }
 
+    @Test
+    public void getOrdersByPatientProgram() throws Exception {
+        executeDataSet("patientWithOrders.xml");
+        OrderType orderType = Context.getOrderService().getOrderType(1);
+        Concept concept = Context.getConceptService().getConcept(16);
+        HashSet<Concept> concepts = new HashSet<Concept>();
+        concepts.add(concept);
+
+        List<Order> activeOrders = orderDao.getOrdersByPatientProgram("dfdfoifo-dkcd-475d-b939-6d82327f36a3", orderType, null);
+
+        assertEquals(2, activeOrders.size());
+//        assertEquals(activeOrders.get(0).getUuid(), "cba00378-0c03-11e4-bb80-f18addb6f839");
+    }
+
     private boolean visitWithUuidExists(String uuid, List<Visit> visits) {
         boolean exists = false;
         for (Visit visit : visits) {

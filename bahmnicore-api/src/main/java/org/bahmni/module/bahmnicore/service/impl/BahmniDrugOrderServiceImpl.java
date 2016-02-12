@@ -181,10 +181,13 @@ public class BahmniDrugOrderServiceImpl implements BahmniDrugOrderService {
     }
 
     @Override
-    public List<Order> getAllDrugOrders(String patientUuid, Set<Concept> conceptsForDrugs, Date startDate, Date endDate, Set<Concept> drugConceptsToBeExcluded) throws ParseException {
+    public List<Order> getAllDrugOrders(String patientUuid, String patientProgramUuid, Set<Concept> conceptsForDrugs,Set<Concept> drugConceptsToBeExcluded) throws ParseException {
         Patient patientByUuid = openmrsPatientService.getPatientByUuid(patientUuid);
         OrderType orderTypeByUuid = orderService.getOrderTypeByUuid(OrderType.DRUG_ORDER_TYPE_UUID);
-        return orderDao.getAllOrders(patientByUuid, orderTypeByUuid, conceptsForDrugs, startDate, endDate, drugConceptsToBeExcluded);
+        if (patientProgramUuid != null) {
+            return orderDao.getOrdersByPatientProgram(patientProgramUuid, orderTypeByUuid, conceptsForDrugs);
+        }
+        return orderDao.getAllOrders(patientByUuid, orderTypeByUuid, conceptsForDrugs, drugConceptsToBeExcluded);
     }
 
     private List<EncounterTransaction.Concept> fetchOrderAttributeConcepts() {
