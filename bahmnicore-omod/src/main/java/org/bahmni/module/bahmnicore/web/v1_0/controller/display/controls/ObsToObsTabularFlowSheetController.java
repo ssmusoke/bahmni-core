@@ -89,7 +89,7 @@ public class ObsToObsTabularFlowSheetController {
 
         BaseTableExtension<PivotTable> extension = (BaseTableExtension<PivotTable>) bahmniExtensions.getExtension("treatmentRegimenExtension", groovyExtension + ".groovy");
         if (extension != null)
-            extension.update(pivotTable, patientUuid);
+            extension.update(pivotTable, patientUuid, patientProgramUuid);
         return pivotTable;
     }
 
