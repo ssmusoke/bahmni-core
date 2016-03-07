@@ -7,6 +7,7 @@ import org.openmrs.module.bahmniemrapi.encountertransaction.service.BahmniEncoun
 import org.openmrs.module.bedmanagement.BedManagementService;
 import org.openmrs.module.webservices.rest.web.RestConstants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +27,7 @@ public class BahmniDischargeController {
     @Transactional
     public BahmniEncounterTransaction discharge(@RequestBody BahmniEncounterTransaction bahmniEncounterTransaction) {
         Patient patientByUuid = Context.getPatientService().getPatientByUuid(bahmniEncounterTransaction.getPatientUuid());
-        BedManagementService bedManagementService = (BedManagementService) Context.getModuleOpenmrsServices(BedManagementService.class.getName()).get(0);
+        BedManagementService bedManagementService = (BedManagementService) (Context.getModuleOpenmrsServices(BedManagementService.class.getName()).get(0));
         bedManagementService.unAssignPatientFromBed(patientByUuid);
         return bahmniEncounterTransactionService.save(bahmniEncounterTransaction);
     }

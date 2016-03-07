@@ -258,6 +258,7 @@
             <groupId>org.openmrs.module</groupId>
             <artifactId>bedmanagement-api</artifactId>
             <version>${bedManagementVersion}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
