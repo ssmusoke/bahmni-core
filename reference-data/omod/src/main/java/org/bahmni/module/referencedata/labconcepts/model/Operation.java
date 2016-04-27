@@ -9,14 +9,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.apache.commons.collections.CollectionUtils.addIgnoreNull;
-import static org.bahmni.module.referencedata.labconcepts.model.event.ConceptServiceEventFactory.allTestsAndPanelsConceptSetEvent;
-import static org.bahmni.module.referencedata.labconcepts.model.event.ConceptServiceEventFactory.departmentEvent;
-import static org.bahmni.module.referencedata.labconcepts.model.event.ConceptServiceEventFactory.drugEvent;
-import static org.bahmni.module.referencedata.labconcepts.model.event.ConceptServiceEventFactory.labConceptSetEvent;
-import static org.bahmni.module.referencedata.labconcepts.model.event.ConceptServiceEventFactory.panelEvent;
-import static org.bahmni.module.referencedata.labconcepts.model.event.ConceptServiceEventFactory.radiologyTestEvent;
-import static org.bahmni.module.referencedata.labconcepts.model.event.ConceptServiceEventFactory.sampleEvent;
-import static org.bahmni.module.referencedata.labconcepts.model.event.ConceptServiceEventFactory.testEvent;
+import static org.bahmni.module.referencedata.labconcepts.model.event.ConceptServiceEventFactory.*;
 
 public class Operation {
 
@@ -29,7 +22,8 @@ public class Operation {
             labConceptSetEvent(),
             allTestsAndPanelsConceptSetEvent(),
             drugEvent(),
-            radiologyTestEvent()
+            radiologyTestEvent(),
+            allConceptsEvent()
     );
 
     public Operation(Method method) {

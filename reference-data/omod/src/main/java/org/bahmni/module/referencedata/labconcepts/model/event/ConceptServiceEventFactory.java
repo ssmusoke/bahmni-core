@@ -2,6 +2,7 @@ package org.bahmni.module.referencedata.labconcepts.model.event;
 
 public class ConceptServiceEventFactory {
     public static final String CONCEPT_URL = "/openmrs/ws/rest/v1/reference-data/%s/%s";
+    public static final String CONCEPT_NAME_URL = "/openmrs/ws/rest/v1/concept/%s?s=byFullySpecifiedName&v=bahmni&name=%s";
     public static final String LAB = "lab";
     public static final String LAB_SAMPLE = "all-samples";
     public static final String SAMPLE = "sample";
@@ -10,6 +11,8 @@ public class ConceptServiceEventFactory {
     public static final String PANEL = "panel";
     public static final String TESTS_AND_PANEL = "all-tests-and-panels";
     public static final String DRUG = "drug";
+    public static final String CONCEPTS = "concepts";
+    public static final String ALL_CONCEPTS = "all-concepts";
     public static final String RADIOLOGY = "radiology";
 
     public static ConceptServiceOperationEvent sampleEvent() {
@@ -38,4 +41,9 @@ public class ConceptServiceEventFactory {
     public static ConceptServiceOperationEvent radiologyTestEvent() {
         return new RadiologyTestEvent(CONCEPT_URL, LAB, RADIOLOGY);
     }
+
+    public static ConceptServiceOperationEvent allConceptsEvent() {
+        return new AllConceptsEvent(CONCEPT_NAME_URL, ALL_CONCEPTS, CONCEPTS);
+    }
+
 }
