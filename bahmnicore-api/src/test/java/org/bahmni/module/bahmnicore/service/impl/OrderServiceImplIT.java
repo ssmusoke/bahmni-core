@@ -4,7 +4,6 @@ import org.bahmni.module.bahmnicore.BaseIntegrationTest;
 import org.bahmni.module.bahmnicore.service.OrderService;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mozilla.javascript.EcmaError;
 import org.openmrs.CareSetting;
 import org.openmrs.Order;
 import org.openmrs.OrderType;
@@ -15,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.core.IsNot.not;
 
 public class OrderServiceImplIT extends BaseIntegrationTest {
 
@@ -52,8 +54,8 @@ public class OrderServiceImplIT extends BaseIntegrationTest {
         List<Visit> visitsWithOrders = bahmniOrderService.getVisitsWithOrders(patient, "DrugOrder", true, null);
         Assert.assertFalse(visitsWithOrders.isEmpty());
         Assert.assertEquals(2, visitsWithOrders.size());
-        Assert.assertNotEquals((Integer)3001, visitsWithOrders.get(0).getId());
-        Assert.assertNotEquals((Integer)3001, visitsWithOrders.get(1).getId());
+        Assert.assertThat(visitsWithOrders.get(0).getId(), not(equalTo((Integer)3001)));
+        Assert.assertThat(visitsWithOrders.get(1).getId(), not(equalTo((Integer)3001)));
     }
 
 

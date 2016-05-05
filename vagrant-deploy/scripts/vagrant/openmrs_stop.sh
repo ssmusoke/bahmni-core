@@ -1,4 +1,4 @@
 #!/bin/sh -x
 set +e
-sudo fuser -k 8080/tcp
+sudo fuser -k 8050/tcp
 set -e

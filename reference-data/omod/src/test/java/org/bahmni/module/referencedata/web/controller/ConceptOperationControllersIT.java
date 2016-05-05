@@ -16,8 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThat;
 
 public class ConceptOperationControllersIT extends BaseIntegrationTest {
     
@@ -45,8 +47,10 @@ public class ConceptOperationControllersIT extends BaseIntegrationTest {
         assertEquals(sampleConcept.getUuid(), sampleData.getId());
         assertEquals(sampleConcept.getName(Context.getLocale()).getName(), sampleData.getShortName());
         assertEquals(sampleConcept.getName(Context.getLocale()).getName(), sampleData.getName());
-        assertNotEquals(sampleConcept.isRetired(), sampleData.getIsActive());
+        assertThat(sampleConcept.isRetired(), not(equalTo(sampleData.getIsActive())));
     }
+
+
 
 
     @Test
@@ -57,7 +61,7 @@ public class ConceptOperationControllersIT extends BaseIntegrationTest {
         assertEquals(departmentConcept.getUuid(), departmentResponse.getId());
         assertEquals(departmentConcept.getName(Context.getLocale()).getName(), departmentResponse.getDescription());
         assertEquals(departmentConcept.getName(Context.getLocale()).getName(), departmentResponse.getName());
-        assertNotEquals(departmentConcept.isRetired(), departmentResponse.getIsActive());
+        assertThat(departmentConcept.isRetired(), not(equalTo(departmentResponse.getIsActive())));
     }
 
     @Test
@@ -68,7 +72,7 @@ public class ConceptOperationControllersIT extends BaseIntegrationTest {
         assertEquals(testConcept.getUuid(), testResponse.getId());
         assertEquals(testConcept.getName(Context.getLocale()).getName(), testResponse.getDescription());
         assertEquals(testConcept.getName(Context.getLocale()).getName(), testResponse.getName());
-        assertNotEquals(testConcept.isRetired(), testResponse.getIsActive());
+        assertThat(testConcept.isRetired(), not(equalTo(testResponse.getIsActive())));
         assertEquals("Numeric", testResponse.getResultType());
     }
 
@@ -79,6 +83,6 @@ public class ConceptOperationControllersIT extends BaseIntegrationTest {
         RadiologyTest testResponse = deserialize(response, RadiologyTest.class);
         assertEquals(radiologyTestConcept.getUuid(), testResponse.getId());
         assertEquals(radiologyTestConcept.getName(Context.getLocale()).getName(), testResponse.getName());
-        assertNotEquals(radiologyTestConcept.isRetired(), testResponse.getIsActive());
+        assertThat(radiologyTestConcept.isRetired(), not(equalTo(testResponse.getIsActive())));
     }
 }

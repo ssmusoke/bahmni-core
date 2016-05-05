@@ -3,7 +3,7 @@ package org.bahmni.module.bahmnicore.dao.impl;
 import org.bahmni.module.bahmnicore.dao.EpisodeDAO;
 import org.bahmni.module.bahmnicore.model.Episode;
 import org.hibernate.SessionFactory;
-import org.hibernate.classic.Session;
+import org.hibernate.Session;
 import org.openmrs.PatientProgram;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

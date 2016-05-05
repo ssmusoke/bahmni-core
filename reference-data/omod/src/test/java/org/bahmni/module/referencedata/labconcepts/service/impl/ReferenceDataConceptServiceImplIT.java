@@ -23,9 +23,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.core.IsNot.not;
+import static org.junit.Assert.*;
 
 public class ReferenceDataConceptServiceImplIT extends BaseIntegrationTest {
 
@@ -99,6 +99,7 @@ public class ReferenceDataConceptServiceImplIT extends BaseIntegrationTest {
         String displayName = "displayName";
         conceptSet.setDisplayName(displayName);
         conceptSet.setClassName("Finding");
+        conceptSet.setDescription("concept set");
         List<String> children = new ArrayList<>();
         children.add("Child1");
         children.add("Child2");
@@ -256,6 +257,8 @@ public class ReferenceDataConceptServiceImplIT extends BaseIntegrationTest {
         concept.setClassName("Finding");
         concept.setDataType("Numeric");
         concept.setUnits("unit");
+        concept.setDescription("description");
+
         assertEquals(2, conceptService.getConceptByUuid("5d2d4cb7-mm3b-0037-70f7-0dmimmm22222").getNames().size());
         Concept savedConcept = referenceDataConceptService.saveConcept(concept);
 
@@ -283,6 +286,7 @@ public class ReferenceDataConceptServiceImplIT extends BaseIntegrationTest {
         concept.setUnits("unit");
         concept.setHiNormal("99");
         concept.setLowNormal("10");
+        concept.setDescription("existing numeric concept");
         Concept savedConcept = referenceDataConceptService.saveConcept(concept);
 
         assertEquals(uniqueName, savedConcept.getName(Context.getLocale()).getName());
@@ -308,8 +312,9 @@ public class ReferenceDataConceptServiceImplIT extends BaseIntegrationTest {
         concept.setUnits("unit");
         concept.setHiNormal("99");
         concept.setLowNormal("10");
+        concept.setDescription("description");
         Concept existingConcept = conceptService.getConceptByUuid(concept.getUuid());
-        assertNotEquals(ConceptDatatype.N_A_UUID, existingConcept.getDatatype().getUuid());
+        assertThat( existingConcept.getDatatype().getUuid(), not(equalTo(ConceptDatatype.N_A_UUID)));
 
         exception.expect(ConceptInUseException.class);
         exception.expectMessage("The concepts datatype cannot be changed if it is already used/associated to an observation");
@@ -324,6 +329,7 @@ public class ReferenceDataConceptServiceImplIT extends BaseIntegrationTest {
         String displayName = "NewShortName";
         concept.setDisplayName(displayName);
         concept.setClassName("Finding");
+        concept.setDescription("description");
         concept.setDataType("Coded");
         Concept existingConcept = conceptService.getConceptByName("Existing Concept with obs");
         assertEquals(1, existingConcept.getNames().size());
@@ -342,6 +348,7 @@ public class ReferenceDataConceptServiceImplIT extends BaseIntegrationTest {
         conceptSet.setUniqueName(uniqueName);
         String displayName = "NewSName";
         conceptSet.setDisplayName(displayName);
+        conceptSet.setDescription("description");
         conceptSet.setClassName("Finding");
         List<String> children = new ArrayList<>();
 
@@ -371,6 +378,8 @@ public class ReferenceDataConceptServiceImplIT extends BaseIntegrationTest {
         concept.setDisplayName(displayName);
         concept.setClassName("Finding");
         concept.setDataType("Coded");
+        concept.setDescription("description");
+
         List<String> answers = new ArrayList<>();
 
         answers.add("Answer1");
@@ -397,8 +406,10 @@ public class ReferenceDataConceptServiceImplIT extends BaseIntegrationTest {
         concept.setUnits("unit");
         concept.setHiNormal("99");
         concept.setLowNormal("10");
+
         Concept existingConcept = conceptService.getConceptByUuid("kf2d4cb7-t3tb-oo37-70f7-0dmimmm22222");
-        assertNotEquals(ConceptDatatype.NUMERIC_UUID, existingConcept.getDatatype().getUuid());
+
+        assertThat(ConceptDatatype.NUMERIC_UUID, not(equalTo(existingConcept.getDatatype().getUuid())));
         Concept savedConcept = referenceDataConceptService.saveConcept(concept);
 
         assertEquals("First Child", savedConcept.getName(Context.getLocale()).getName());

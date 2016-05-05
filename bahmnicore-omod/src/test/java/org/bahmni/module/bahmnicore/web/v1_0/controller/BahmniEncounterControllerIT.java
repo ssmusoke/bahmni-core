@@ -17,8 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 @Ignore
@@ -112,10 +114,10 @@ public class BahmniEncounterControllerIT extends BaseIntegrationTest {
             }
         });
         BahmniEncounterTransaction secondEncounterTransaction = bahmniEncounterController.update(encounterTransactionForSecondVisit);
-        assertNotEquals(firstEncounterTransaction.getEncounterUuid(), secondEncounterTransaction.getEncounterUuid());
+        assertThat(firstEncounterTransaction.getEncounterUuid(), not(equalTo(secondEncounterTransaction.getEncounterUuid())));
 
         final BahmniDiagnosis bahmniDiagnosisAfterSecondSave = secondEncounterTransaction.getBahmniDiagnoses().get(0);
-        assertNotEquals(bahmniDiagnosisAfterFirstSave.getExistingObs(), bahmniDiagnosisAfterSecondSave.getExistingObs());
+        assertThat(bahmniDiagnosisAfterFirstSave.getExistingObs(), not(equalTo(bahmniDiagnosisAfterSecondSave.getExistingObs())));
         assertDiagnosis(bahmniDiagnosisAfterSecondSave, Diagnosis.Certainty.CONFIRMED, Diagnosis.Order.PRIMARY, "Ruled Out", false, null);
         assertDiagnosis(bahmniDiagnosisAfterSecondSave.getFirstDiagnosis(), Diagnosis.Certainty.PRESUMED, Diagnosis.Order.SECONDARY, null, true, null);
         BahmniEncounterTransaction bahmniEncounterTransaction = bahmniEncounterController.get(firstEncounterTransaction.getEncounterUuid());

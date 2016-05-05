@@ -12,10 +12,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.*;
 
 public class ObsToObsTabularFlowSheetControllerIT extends BaseIntegrationTest {
     @Autowired
@@ -43,7 +42,7 @@ public class ObsToObsTabularFlowSheetControllerIT extends BaseIntegrationTest {
         assertEquals(rows.get(0).getValue("FOOD ASSISTANCE").get(0).getValueAsString(), "Yes");
         assertEquals(rows.get(0).getValue("DATE OF FOOD ASSISTANCE").get(0).getValueAsString(), "2008-08-14 00:00:00");
         assertNotNull(pivotTable.getHeaders());
-        assertNotEquals("Should not be empty list", Collections.EMPTY_LIST, pivotTable.getHeaders());
+        assertThat("Should not be empty list", pivotTable.getHeaders(), not(equalTo(Collections.EMPTY_SET)));
     }
 
     @Test
@@ -64,7 +63,7 @@ public class ObsToObsTabularFlowSheetControllerIT extends BaseIntegrationTest {
         assertEquals(rows.get(0).getValue("DATE OF FOOD ASSISTANCE").get(0).getValueAsString(), "2008-08-14 00:00:00");
         assertNull("Should not return this concept", rows.get(0).getValue("FAVORITE FOOD, NON-CODED"));
         assertNotNull(pivotTable.getHeaders());
-        assertNotEquals("Should not be empty list", Collections.EMPTY_LIST, pivotTable.getHeaders());
+        assertThat("Should not be empty list", pivotTable.getHeaders(), not(equalTo(Collections.EMPTY_SET)));
     }
 
     @Test
@@ -79,7 +78,7 @@ public class ObsToObsTabularFlowSheetControllerIT extends BaseIntegrationTest {
         List<PivotRow> rows = pivotTable.getRows();
         assertEquals(2, rows.size());
         assertNotNull(pivotTable.getHeaders());
-        assertNotEquals("Should not be empty list", Collections.EMPTY_LIST, pivotTable.getHeaders());
+        assertThat("Should not be empty list", pivotTable.getHeaders(), not(equalTo(Collections.EMPTY_SET)));
     }
 
     @Test
@@ -97,7 +96,7 @@ public class ObsToObsTabularFlowSheetControllerIT extends BaseIntegrationTest {
         assertNull("Should not return this concept", rows.get(0).getValue("BACTERIOLOGY ADDITIONAL ATTRIBUTES"));
         assertNull("Should not return this concept", rows.get(0).getValue("BACTERIOLOGY RESULTS"));
         assertNotNull(pivotTable.getHeaders());
-        assertNotEquals("Should not be empty list", Collections.EMPTY_LIST, pivotTable.getHeaders());
+        assertThat("Should not be empty list", pivotTable.getHeaders(), not(equalTo(Collections.EMPTY_SET)));
     }
 
     @Test

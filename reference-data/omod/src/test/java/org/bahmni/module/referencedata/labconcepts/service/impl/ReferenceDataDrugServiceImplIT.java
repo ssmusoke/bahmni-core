@@ -3,6 +3,7 @@ package org.bahmni.module.referencedata.labconcepts.service.impl;
 import org.bahmni.module.referencedata.BaseIntegrationTest;
 import org.bahmni.module.referencedata.labconcepts.contract.Drug;
 import org.bahmni.module.referencedata.labconcepts.service.ReferenceDataDrugService;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -11,9 +12,10 @@ import org.openmrs.api.APIException;
 import org.openmrs.api.context.Context;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ReferenceDataDrugServiceImplIT extends BaseIntegrationTest {
@@ -112,7 +114,7 @@ public class ReferenceDataDrugServiceImplIT extends BaseIntegrationTest {
 
         drug.setDosageForm("Tablet");
         savedDrug2 = referenceDataDrugService.saveDrug(drug);
-        assertNotEquals(savedDrug1.getUuid(), savedDrug2.getUuid());
+        Assert.assertThat(savedDrug1.getUuid(), not(equalTo(savedDrug2.getUuid())));
 
         drug.setDosageForm("Capsule");
         drug.setGenericName("Random Drug Concept");
