@@ -20,6 +20,8 @@
         <module>obs-relation</module>
         <module>bahmni-test-commons</module>
         <module>bahmnicore-ui</module>
+        <module>bahmni-dataintegrity-api</module>
+        <module>bahmni-dataintegrity-omod</module>
     </modules>
 
     <properties>
@@ -74,6 +76,17 @@
                 <artifactId>bahmnicore-omod</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.bahmni.module</groupId>
+                <artifactId>bahmni-datantegrity-omod</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bahmni.module</groupId>
+                <artifactId>bahmni-datantegrity-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <!--End of child modules-->
 
             <dependency>
