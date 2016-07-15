@@ -15,7 +15,7 @@
     <name>Bahmni Data Integrity OMOD</name>
 
     <properties>
-        <MODULE_ID>bahmnidatantegrityomod</MODULE_ID>
+        <MODULE_ID>dataintegrity</MODULE_ID>
         <MODULE_NAME>${project.name}</MODULE_NAME>
         <MODULE_VERSION>${project.version}</MODULE_VERSION>
         <MODULE_PACKAGE>${project.groupId}.${MODULE_ID}</MODULE_PACKAGE>
@@ -74,6 +74,21 @@
         </plugins>
     </build>
     <dependencies>
-
+        <dependency>
+            <groupId>org.openmrs.api</groupId>
+            <artifactId>openmrs-api</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${springVersion}</version>
+        </dependency>
     </dependencies>
 </project>

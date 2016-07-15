@@ -10,10 +10,45 @@
         <groupId>org.bahmni.module</groupId>
         <version>0.83-SNAPSHOT</version>
     </parent>
-    <name>bahmni datantegrity api</name>
+    <name>dataintegrity api</name>
     <packaging>jar</packaging>
     <groupId>groupId</groupId>
     <artifactId>bahmni-datantegrity-api</artifactId>
     <version>1.0-SNAPSHOT</version>
-    
+
+    <dependencies>
+        <dependency>
+            <groupId>org.openmrs.api</groupId>
+            <artifactId>openmrs-api</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${springVersion}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+    </build>
+
 </project>
