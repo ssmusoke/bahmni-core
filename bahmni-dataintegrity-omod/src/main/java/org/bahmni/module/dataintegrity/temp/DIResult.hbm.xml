@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="org.bahmni.module.dataintegrity.temp.DIResult" table="dataintegrity_result" schema="openmrs">
+        <id name="resultId">
+            <column name="result_id" sql-type="int(11)"/>
+        </id>
+        <property name="runId">
+            <column name="run_id" sql-type="int(11)"/>
+        </property>
+        <property name="ruleId">
+            <column name="rule_id" sql-type="int(11)"/>
+        </property>
+        <property name="patientId">
+            <column name="patient_id" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="patientProgramId">
+            <column name="patient_program_id" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="obsId">
+            <column name="obs_id" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="encounterId">
+            <column name="encounter_id" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="visitId">
+            <column name="visit_id" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="notes">
+            <column name="notes" sql-type="varchar(500)" length="500" not-null="true"/>
+        </property>
+
+        <many-to-one name="DIRuleByRuleId" class="temp.DIRule">
+            <column name="rule_id"/>
+        </many-to-one>
+        <many-to-one name="DIRunByRunId" class="temp.DIRun">
+            <column name="run_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>
