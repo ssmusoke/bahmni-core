@@ -1,6 +1,7 @@
 package org.bahmni.module.dataintegrity.db.impl;
 
 import org.bahmni.module.dataintegrity.db.DataintegrityDAO;
+import org.bahmni.module.dataintegrity.rule.impl.PatientProgramRuleResult;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.apache.commons.lang3.StringUtils;
@@ -16,7 +17,7 @@ public class DataintegrityDAOImpl implements DataintegrityDAO {
     private SessionFactory sessionFactory;
 
     @Override
-    public List<String> getAllByObsAndDrugs(List<String> drugsList, Map<String, List<String>> codedObs) {
+    public List<PatientProgramRuleResult> getAllByObsAndDrugs(List<String> drugsList, Map<String, List<String>> codedObs) {
 
         StringBuilder queryString = new StringBuilder("SELECT epp.patient_program_id, ");
 
@@ -50,7 +51,7 @@ public class DataintegrityDAOImpl implements DataintegrityDAO {
         List<String> newList = new ArrayList<>(ruleOutput.size());
         for (Object id : ruleOutput) newList.add(id.toString());
 
-        return newList;
+        return null;
     }
 
     private String getObsQuery(Map.Entry<String, List<String>> obsConcept) {

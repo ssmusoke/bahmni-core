@@ -1,4 +1,4 @@
-package org.bahmni.module.dataintegrity.factory;
+package org.bahmni.module.dataintegrity.rule.factory;
 
 import org.bahmni.module.dataintegrity.db.DataIntegrityRule;
 import org.bahmni.module.dataintegrity.rule.RuleDefn;

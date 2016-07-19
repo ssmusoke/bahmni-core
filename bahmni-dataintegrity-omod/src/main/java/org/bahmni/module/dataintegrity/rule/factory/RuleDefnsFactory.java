@@ -1,10 +1,11 @@
-package org.bahmni.module.dataintegrity.factory;
+package org.bahmni.module.dataintegrity.rule.factory;
 
 import org.bahmni.module.dataintegrity.db.DataIntegrityRule;
 import org.bahmni.module.dataintegrity.rule.RuleDefn;
 
 import java.util.List;
+import java.util.Map;
 
 public interface RuleDefnsFactory<T> {
-     List<RuleDefn<T>> getRuleDefns(List<DataIntegrityRule> dataIntegrityRules);
+     Map<DataIntegrityRule, RuleDefn<T>> getRuleDefns(List<DataIntegrityRule> dataIntegrityRules);
 }

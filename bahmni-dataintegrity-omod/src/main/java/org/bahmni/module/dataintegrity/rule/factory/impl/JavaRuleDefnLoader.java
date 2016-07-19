@@ -1,7 +1,7 @@
-package org.bahmni.module.dataintegrity.factory.impl;
+package org.bahmni.module.dataintegrity.rule.factory.impl;
 
 import org.bahmni.module.dataintegrity.db.DataIntegrityRule;
-import org.bahmni.module.dataintegrity.factory.RuleDefnLoader;
+import org.bahmni.module.dataintegrity.rule.factory.RuleDefnLoader;
 import org.bahmni.module.dataintegrity.rule.RuleDefn;
 
 public class JavaRuleDefnLoader<T> implements RuleDefnLoader {
