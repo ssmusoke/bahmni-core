@@ -1,10 +1,10 @@
-package org.bahmni.module.dataintegrity.temp;
+package org.bahmni.module.dataintegrity.db;
 
 import org.openmrs.BaseOpenmrsObject;
 
 import java.io.Serializable;
 
-public class DIRule extends BaseOpenmrsObject implements Serializable {
+public class DataIntegrityRule extends BaseOpenmrsObject implements Serializable {
     private int ruleId;
     private String ruleName;
     private String ruleCategory;
