@@ -1,22 +1,25 @@
 package org.bahmni.module.dataintegrity.db.impl;
 
-import org.bahmni.module.dataintegrity.db.DataIntegrityResult;
-import org.bahmni.module.dataintegrity.db.DataIntegrityRule;
+import org.bahmni.module.dataintegrity.db.DataintegrityResult;
+import org.bahmni.module.dataintegrity.db.DataintegrityRule;
 import org.bahmni.module.dataintegrity.db.DataIntegrityService;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class DataIntegrityServiceImpl implements DataIntegrityService {
 
-    // read all rules from dataintegrity_rule table
+    @Autowired
+    private SessionFactory sessionFactory;
+
     @Override
-    public List<DataIntegrityRule> getRules() {
-        return null;
+    public List<DataintegrityRule> getRules() {
+        return sessionFactory.getCurrentSession().createCriteria(DataintegrityRule.class).list();
     }
 
-    // save all rules from dataintegrity_rule table
     @Override
-    public void saveResults(List<DataIntegrityResult> results) {
-
+    public void saveResults(List<DataintegrityResult> results) {
+        sessionFactory.getCurrentSession().save(results);
     }
 }

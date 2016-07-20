@@ -4,30 +4,27 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
- 
 
- 	<!-- Uncomment this and edit the values below to use this file
-
-	<changeSet id="mymoduleid-2010-05-25-15:50" author="bwolfe">
+	<changeSet id="20161128-1601" author="jaya, deepak" dbms="mysql">
 		<preConditions onFail="MARK_RAN">
-			<not><tableExists tableName="mymoduleid_myobject"/></not>
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*) FROM scheduler_task_config
+				WHERE schedulable_class = 'org.bahmni.module.dataintegrity.scheduler.DataIntegrityTask'
+				And name = 'Data Integrity Task'
+			</sqlCheck>
 		</preConditions>
-		<comment>
-			Creating the mymoduleid_myobject table
-		</comment>
-		<createTable tableName="mymoduleid_myobject">
-			<column name="mymoduleid_myobject_id" type="int">
-				<constraints primaryKey="true" nullable="false"/>
-			</column>
-			<column name="firstname" type="varchar(255)"/>
-			<column name="lastname" type="varchar(255)"/>
-			<column name="username" type="varchar(255)">
-				<constraints unique="true" nullable="false"/>
-			</column>
-			<column name="testid" type="int" />
-		</createTable>
-    </changeSet>
-
-    -->
+		<comment>Inserting Data Integrity Task into 'schedule_task_config' table</comment>
+		<insert tableName="scheduler_task_config">
+			<column name="name" value="Data Integrity Task" />
+			<column name="description" value="runs all integrity rules" />
+			<column name="schedulable_class" value="org.bahmni.module.dataintegrity.scheduler.DataIntegrityTask" />
+			<column name="start_time_pattern" value="MM/dd/yyyy HH:mm:ss" />
+			<column name="start_time" valueDate="2011-11-28T23:59:59" />
+			<column name="repeat_interval" value="86400" />
+			<column name="date_created" valueDate="CURRENT_TIMESTAMP" />
+			<column name="created_by" value="1" />
+			<column name="uuid" value="8c17b376-1a2b-11e1-a51a-00248140a5eb" />
+		</insert>
+	</changeSet>
  
 </databaseChangeLog>

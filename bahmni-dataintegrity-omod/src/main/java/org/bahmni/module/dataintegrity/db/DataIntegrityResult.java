@@ -1,16 +1,43 @@
 package org.bahmni.module.dataintegrity.db;
 
-import org.openmrs.BaseOpenmrsObject;
+import org.openmrs.BaseOpenmrsMetadata;
+import org.openmrs.Patient;
+import org.openmrs.PatientProgram;
 
 import java.io.Serializable;
 
-public class DataIntegrityResult extends BaseOpenmrsObject implements Serializable {
+public class DataintegrityResult extends BaseOpenmrsMetadata implements Serializable {
     private int resultId;
-    private int ruleId;
-    private int patientId;
-    private int patientProgramId;
     private String actionURL;
     private String notes;
+    private Patient patient;
+    private PatientProgram patientProgram;
+    private DataintegrityRule rule;
+
+    public DataintegrityRule getRule() {
+        return rule;
+    }
+
+    public void setRule(DataintegrityRule rule) {
+        this.rule = rule;
+    }
+
+    public PatientProgram getPatientProgram() {
+        return patientProgram;
+    }
+
+    public void setPatientProgram(PatientProgram patientProgram) {
+        this.patientProgram = patientProgram;
+    }
+
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
 
     public int getResultId() {
         return resultId;
@@ -19,31 +46,6 @@ public class DataIntegrityResult extends BaseOpenmrsObject implements Serializab
     public void setResultId(int resultId) {
         this.resultId = resultId;
     }
-
-    public int getRuleId() {
-        return ruleId;
-    }
-
-    public void setRuleId(int ruleId) {
-        this.ruleId = ruleId;
-    }
-
-    public int getPatientId() {
-        return patientId;
-    }
-
-    public void setPatientId(int patientId) {
-        this.patientId = patientId;
-    }
-
-    public int getPatientProgramId() {
-        return patientProgramId;
-    }
-
-    public void setPatientProgramId(int patientProgramId) {
-        this.patientProgramId = patientProgramId;
-    }
-
 
     public String getNotes() {
         return notes;

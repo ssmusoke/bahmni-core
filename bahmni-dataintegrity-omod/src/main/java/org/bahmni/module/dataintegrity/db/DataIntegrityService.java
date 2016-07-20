@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface DataIntegrityService {
 
-    List<DataIntegrityRule> getRules();
+    List<DataintegrityRule> getRules();
 
-    void saveResults(List<DataIntegrityResult> results);
+    void saveResults(List<DataintegrityResult> results);
 }

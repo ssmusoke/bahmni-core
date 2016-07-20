@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="org.bahmni.module.dataintegrity.db.DataintegrityRule" table="dataintegrity_rule" schema="openmrs">
+        <id name="ruleId">
+            <column name="rule_id" sql-type="int(11)"/>
+        </id>
+        <property name="ruleName">
+            <column name="rule_name" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="ruleCategory">
+            <column name="rule_category" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="ruleType">
+            <column name="rule_type" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="ruleCode">
+            <column name="rule_code" sql-type="varchar(500)" length="500"/>
+        </property>
+        <property name="uuid" type="java.lang.String"
+                  column="uuid" length="38" unique="true" not-null="true"/>
+
+        <many-to-one name="creator" class="org.openmrs.User" not-null="true"/>
+
+        <property name="dateCreated" type="java.util.Date" column="date_created"
+                  not-null="true" length="19"/>
+
+        <many-to-one name="changedBy" class="org.openmrs.User" column="changed_by"/>
+
+        <property name="dateChanged" type="java.util.Date" column="date_changed"
+                  length="19"/>
+
+        <property name="retired" type="boolean" column="retired"
+                  length="1" not-null="true"/>
+
+        <many-to-one name="retiredBy" class="org.openmrs.User" column="retired_by"/>
+
+        <property name="dateRetired" type="java.util.Date" column="date_retired"
+                  length="19"/>
+
+        <property name="retireReason" type="java.lang.String" column="retire_reason"
+                  length="255"/>
+    </class>
+</hibernate-mapping>
