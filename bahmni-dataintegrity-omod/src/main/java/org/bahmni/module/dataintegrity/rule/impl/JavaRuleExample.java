@@ -3,7 +3,6 @@ package org.bahmni.module.dataintegrity.rule.impl;
 import org.bahmni.module.dataintegrity.db.DataintegrityDAO;
 import org.bahmni.module.dataintegrity.rule.RuleResult;
 import org.openmrs.PatientProgram;
-import org.openmrs.logic.Rule;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -12,14 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class JavaRuleExample extends PatientProgramRuleDefn{
-
-    private DataintegrityDAO dataintegrityDAO;
-
-    @Autowired
-    public JavaRuleExample(DataintegrityDAO dataintegrityDAO){
-
-        this.dataintegrityDAO = dataintegrityDAO;
-    }
 
     @Override
     public List<RuleResult<PatientProgram>> evaluate() {

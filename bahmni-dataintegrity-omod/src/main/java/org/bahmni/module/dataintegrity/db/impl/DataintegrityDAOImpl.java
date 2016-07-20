@@ -1,31 +1,37 @@
 package org.bahmni.module.dataintegrity.db.impl;
 
 import org.bahmni.module.dataintegrity.db.DataintegrityDAO;
+import org.bahmni.module.dataintegrity.db.DataintegrityResult;
+import org.bahmni.module.dataintegrity.db.DataintegrityRule;
 import org.bahmni.module.dataintegrity.rule.RuleResult;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.transform.AliasToBeanResultTransformer;
 import org.openmrs.PatientProgram;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
+import java.util.Map.Entry;
 
-@Repository
+@Component("DataintegrityDAO")
 public class DataintegrityDAOImpl implements DataintegrityDAO {
 
-    @Autowired
     private SessionFactory sessionFactory;
 
     @Override
     public List<RuleResult<PatientProgram>> getAllByObsAndDrugs(List<String> drugsList, Map<String, List<String>> codedObs) {
 
-        StringBuilder queryString = new StringBuilder("SELECT epp.patient_program_id, ");
+        StringBuilder queryString =
+                new StringBuilder("SELECT epp.patient_program_id as entity");
 
-        queryString.append(codedObs != null && codedObs.size() > 0 ? "obs1.comments AS notes" : "NULL AS notes");
+        queryString.append((codedObs != null && codedObs.size() > 0 ? " , obs1.comments " : " NULL") + " AS notes ");
+        queryString.append((codedObs != null && codedObs.size() > 0 ? " , obs1.uuid " : " NULL ") + " AS actionURL ");
 
         queryString.append(
-                "FROM" +
+                " FROM" +
                 "    episode_patient_program epp" +
                 "    JOIN episode_encounter ee ON ee.episode_id = epp.episode_id" );
 
@@ -38,7 +44,7 @@ public class DataintegrityDAOImpl implements DataintegrityDAO {
                 "						        cn.name IN (:drugs)" );
 
         if(codedObs!=null)
-            for( Map.Entry<String, List<String>> obsConcept : codedObs.entrySet())
+            for( Entry<String, List<String>> obsConcept : codedObs.entrySet())
                 queryString.append(getObsQuery(obsConcept));
 
         queryString.append(" GROUP BY epp.patient_program_id");
@@ -48,22 +54,37 @@ public class DataintegrityDAOImpl implements DataintegrityDAO {
         if(drugsList!=null && drugsList.size() > 0)
             queryToGetObs.setParameterList("drugs", drugsList);
 
-        List ruleOutput = queryToGetObs.list();
-        List<String> newList = new ArrayList<>(ruleOutput.size());
-        for (Object id : ruleOutput) newList.add(id.toString());
-
-        return null;
+        return queryToGetObs.setResultTransformer(new AliasToBeanResultTransformer(RuleResult.class)).list();
     }
 
-    private String getObsQuery(Map.Entry<String, List<String>> obsConcept) {
+    private String getObsQuery(Entry<String, List<String>> obsConcept) {
         String concpetValues = StringUtils.join(obsConcept.getValue(), "','");
         return "   INNER JOIN (" +
-        "   SELECT  o.comments, o.encounter_id" +
+        "   SELECT  o.comments, o.encounter_id, o.uuid " +
         "   FROM    obs o" +
         "           JOIN concept_view cv ON     o.concept_id = cv.concept_id AND o.voided = 0 AND" +
         "                                       cv.concept_full_name = '" + obsConcept.getKey() + "'" +
         "           JOIN concept_view cv_value ON   o.value_coded = cv_value.concept_id  AND " +
         "                                           cv_value.concept_full_name IN ('" + concpetValues + "') " +
-        "   ) obs1 ON obs1.encounter_id = e.encounter_id"; //TODO: modify for multiple obs
+        "   ) obs1 ON obs1.encounter_id = ee.encounter_id"; //TODO: modify for multiple obs
+    }
+
+    @Override
+    public List<DataintegrityRule> getRules() {
+        return sessionFactory.getCurrentSession().createCriteria(DataintegrityRule.class).list();
+    }
+
+    @Override
+    public void saveResults(List<DataintegrityResult> results) {
+
+        sessionFactory.getCurrentSession().save(results);
+    }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
 }

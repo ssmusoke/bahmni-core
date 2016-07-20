@@ -8,4 +8,8 @@ import java.util.Map;
 
     public interface DataintegrityDAO {
     List<RuleResult<PatientProgram>> getAllByObsAndDrugs(List<String> drugsList, Map<String, List<String>> codedObs);
-}
+
+        List<DataintegrityRule> getRules();
+
+        void saveResults(List<DataintegrityResult> results);
+    }

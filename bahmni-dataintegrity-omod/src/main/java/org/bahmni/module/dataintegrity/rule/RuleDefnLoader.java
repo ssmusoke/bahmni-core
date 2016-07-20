@@ -7,8 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DefnLoader<T> {
-
+public class RuleDefnLoader<T> {
 
     public Map<DataintegrityRule, RuleDefn<T>> getRuleDefns(List<DataintegrityRule> dataintegrityRules) {
         Map<DataintegrityRule, RuleDefn<T>> rulesWithDefn = new HashMap<>();
@@ -19,12 +18,11 @@ public class DefnLoader<T> {
             if("java".equals(rule.getRuleType())){
                 ruleDefn = getJavaRuleInstance(rule.getRuleCode());
             }
-//            else if("groovy".equals(rule.getRuleType())){
-//
-//            }
-//            else if("sql".equals(rule.getRuleType())){
-//
-//            }
+            /*
+            else if("groovy".equals(rule.getRuleType())){
+            }
+            else if("sql".equals(rule.getRuleType())){
+            }*/
 
             if(ruleDefn != null) rulesWithDefn.put(rule, ruleDefn);
         }
