@@ -46,13 +46,27 @@
         <property name="moduleService">
             <list>
                 <value>org.bahmni.module.dataintegrity.db.DataintegrityDAO</value>
-                <bean class="org.bahmni.module.dataintegrity.db.impl.DataintegrityDAOImpl">
-                    <property name="sessionFactory">
-                        <ref bean="sessionFactory" />
-                    </property>
-                </bean>
+                <ref local="dao"/>
             </list>
         </property>
     </bean>
 
+    <bean id="dataintegrityDAO" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager">
+            <ref bean="transactionManager"/>
+        </property>
+        <property name="target" ref="DataintegrityDAO"></property>
+        <property name="preInterceptors">
+            <ref bean="serviceInterceptors"/>
+        </property>
+        <property name="transactionAttributeSource">
+            <ref bean="transactionAttributeSource"/>
+        </property>
+    </bean>
+
+    <bean id="dao" class="org.bahmni.module.dataintegrity.db.impl.DataintegrityDAOImpl">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory" />
+        </property>
+    </bean>
 </beans>

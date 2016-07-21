@@ -15,7 +15,9 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
+@Component("DataintegrityEvaluationService")
 public class DataintegrityEvaluationServiceImpl<T> implements DataintegrityEvaluationService<T> {
 
     private DataintegrityDAO dataintegrityDAO;
@@ -25,9 +27,11 @@ public class DataintegrityEvaluationServiceImpl<T> implements DataintegrityEvalu
         RuleResultMapper resultMapper = new RuleResultMapper();
         List<DataintegrityResult> results = new ArrayList<>();
 
+        dataintegrityDAO.clearAllResults();
+
         Map<DataintegrityRule, RuleDefn<T>> rulesWithDefns = loadRuleDefns();
 
-        for (Map.Entry<DataintegrityRule, RuleDefn<T>> ruleWithDefn : rulesWithDefns.entrySet()) {
+        for (Entry<DataintegrityRule, RuleDefn<T>> ruleWithDefn : rulesWithDefns.entrySet()) {
             List<RuleResult<T>> ruleResults = ruleWithDefn.getValue().evaluate();
 
             results.addAll(resultMapper.getDataintegrityResults(ruleWithDefn, ruleResults));

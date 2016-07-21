@@ -1,18 +1,28 @@
 package org.bahmni.module.dataintegrity.db;
 
-import org.openmrs.BaseOpenmrsMetadata;
+import org.openmrs.BaseOpenmrsObject;
 import org.openmrs.Patient;
 import org.openmrs.PatientProgram;
 
 import java.io.Serializable;
+import java.util.Date;
 
-public class DataintegrityResult extends BaseOpenmrsMetadata implements Serializable {
+public class DataintegrityResult extends BaseOpenmrsObject implements Serializable {
     private int resultId;
     private String actionUrl;
     private String notes;
     private Patient patient;
     private PatientProgram patientProgram;
     private DataintegrityRule rule;
+    private Date dateCreated;
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
 
     public DataintegrityRule getRule() {
         return rule;

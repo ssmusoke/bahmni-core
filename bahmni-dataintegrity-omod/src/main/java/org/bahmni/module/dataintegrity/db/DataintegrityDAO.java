@@ -12,4 +12,6 @@ import java.util.Map;
         List<DataintegrityRule> getRules();
 
         void saveResults(List<DataintegrityResult> results);
+
+        void clearAllResults();
     }

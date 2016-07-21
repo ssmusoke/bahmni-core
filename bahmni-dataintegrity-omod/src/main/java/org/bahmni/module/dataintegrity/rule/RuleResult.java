@@ -1,9 +1,9 @@
 package org.bahmni.module.dataintegrity.rule;
 
 public class RuleResult<T> {
-    T entity;
-    String notes;
-    String actionUrl;
+    private T entity;
+    private String notes;
+    private String actionUrl;
 
     public T getEntity() {
         return entity;

@@ -7,11 +7,11 @@ import org.bahmni.module.dataintegrity.rule.RuleResult;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Transaction;
+import org.hibernate.classic.Session;
 import org.hibernate.transform.AliasToBeanResultTransformer;
 import org.openmrs.PatientProgram;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -28,7 +28,8 @@ public class DataintegrityDAOImpl implements DataintegrityDAO {
                 new StringBuilder("SELECT epp.patient_program_id as entity");
 
         queryString.append((codedObs != null && codedObs.size() > 0 ? " , obs1.comments " : " NULL") + " AS notes ");
-        queryString.append((codedObs != null && codedObs.size() > 0 ? " , obs1.uuid " : " NULL ") + " AS actionURL ");
+        //TODO: get action url
+        queryString.append((codedObs != null && codedObs.size() > 0 ? " , obs1.comments " : " NULL ") + " AS actionUrl ");
 
         queryString.append(
                 " FROM" +
@@ -76,8 +77,12 @@ public class DataintegrityDAOImpl implements DataintegrityDAO {
 
     @Override
     public void saveResults(List<DataintegrityResult> results) {
+        for(DataintegrityResult result: results) saveResult(result);
+    }
 
-        sessionFactory.getCurrentSession().save(results);
+    @Override
+    public void clearAllResults(){
+        sessionFactory.getCurrentSession().createQuery("delete from dataintegrity_result").executeUpdate();
     }
 
     public void setSessionFactory(SessionFactory sessionFactory) {
@@ -86,5 +91,22 @@ public class DataintegrityDAOImpl implements DataintegrityDAO {
 
     public SessionFactory getSessionFactory() {
         return sessionFactory;
+    }
+
+    private void saveResult(DataintegrityResult result) {
+        final Session session = sessionFactory.openSession();
+        try {
+            final Transaction transaction = session.beginTransaction();
+            try {
+                sessionFactory.getCurrentSession().save(result);
+                transaction.commit();
+            } catch (Exception ex) {
+                transaction.rollback();
+                throw ex;
+            }
+
+        } finally {
+            session.close();
+        }
     }
 }
