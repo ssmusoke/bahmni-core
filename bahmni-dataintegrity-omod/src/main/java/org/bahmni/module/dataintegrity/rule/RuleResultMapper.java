@@ -23,7 +23,7 @@ public class RuleResultMapper<T> {
 
             diResult.setRule(ruleWithDefn.getKey());
             diResult.setNotes(result.getNotes());
-            diResult.setActionURL(result.getActionUrl());
+            diResult.setActionUrl(result.getActionUrl());
 
             results.add(diResult);
         }

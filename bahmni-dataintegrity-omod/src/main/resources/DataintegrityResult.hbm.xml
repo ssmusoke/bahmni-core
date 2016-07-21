@@ -8,7 +8,7 @@
         <id name="resultId">
             <column name="result_id" sql-type="int(11)"/>
         </id>
-        <property name="actionURL">
+        <property name="actionUrl">
             <column name="action_url" sql-type="varchar(500)" length="500" not-null="true"/>
         </property>
         <property name="notes">

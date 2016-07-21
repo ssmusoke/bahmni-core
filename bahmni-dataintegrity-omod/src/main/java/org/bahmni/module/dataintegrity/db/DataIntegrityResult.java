@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class DataintegrityResult extends BaseOpenmrsMetadata implements Serializable {
     private int resultId;
-    private String actionURL;
+    private String actionUrl;
     private String notes;
     private Patient patient;
     private PatientProgram patientProgram;
@@ -65,11 +65,11 @@ public class DataintegrityResult extends BaseOpenmrsMetadata implements Serializ
         resultId = integer;
     }
 
-    public String getActionURL() {
-        return actionURL;
+    public String getActionUrl() {
+        return actionUrl;
     }
 
-    public void setActionURL(String actionURL) {
-        this.actionURL = actionURL;
+    public void setActionUrl(String actionUrl) {
+        this.actionUrl = actionUrl;
     }
 }

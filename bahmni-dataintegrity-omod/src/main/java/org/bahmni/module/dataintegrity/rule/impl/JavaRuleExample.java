@@ -17,10 +17,10 @@ public class JavaRuleExample extends PatientProgramRuleDefn{
         List<RuleResult<PatientProgram>> ruleResults = new ArrayList<>();
         HashMap<String, List<String>> conceptValuesMap = new HashMap<>();
 
-        conceptValuesMap.put("EOT, Outcome", Arrays.asList("Completed", "Not Evaluated"));
+        conceptValuesMap.put("BMI Abnormal", Arrays.asList("True", "False"));
 
         List<RuleResult<PatientProgram>> results
-                = dataintegrityDAO.getAllByObsAndDrugs(Arrays.asList("Bedaquiline", "Delamanid"), conceptValuesMap);
+                = dataintegrityDAO.getAllByObsAndDrugs(Arrays.asList("Gatifloxacin", "Delamanid"), conceptValuesMap);
 
         for(RuleResult<PatientProgram> result : results) ruleResults.add(result);
 
