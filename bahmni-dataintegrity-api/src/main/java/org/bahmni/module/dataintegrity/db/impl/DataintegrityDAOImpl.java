@@ -82,7 +82,8 @@ public class DataintegrityDAOImpl implements DataintegrityDAO {
 
     @Override
     public void clearAllResults(){
-        sessionFactory.getCurrentSession().createQuery("delete from dataintegrity_result").executeUpdate();
+        sessionFactory.getCurrentSession()
+                .createSQLQuery("delete from dataintegrity_result").executeUpdate();
     }
 
     public void setSessionFactory(SessionFactory sessionFactory) {
@@ -98,8 +99,9 @@ public class DataintegrityDAOImpl implements DataintegrityDAO {
         try {
             final Transaction transaction = session.beginTransaction();
             try {
-                sessionFactory.getCurrentSession().save(result);
+                session.save(result);
                 transaction.commit();
+                session.flush();
             } catch (Exception ex) {
                 transaction.rollback();
                 throw ex;

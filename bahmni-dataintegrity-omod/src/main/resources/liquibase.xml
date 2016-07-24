@@ -5,11 +5,11 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
 
-	<changeSet id="data-integrity-201607211111" author="jaya, deepak" dbms="mysql">
+	<changeSet id="data-integrity-201607221101" author="jaya, deepak" dbms="mysql">
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">
 				SELECT COUNT(*) FROM scheduler_task_config
-				WHERE schedulable_class = 'org.bahmni.module.dataintegrity.scheduler.DataIntegrityTask'
+				WHERE schedulable_class = 'org.bahmni.module.DataIntegrityTask'
 				And name = 'Data Integrity Task'
 			</sqlCheck>
 		</preConditions>
@@ -27,7 +27,7 @@
 		</insert>
 	</changeSet>
 
-	<changeSet id="data-integrity-201607211112" author="jaya, deepak">
+	<changeSet id="data-integrity-201607221102" author="jaya, deepak">
 		<createTable tableName="dataintegrity_rule" >
 			<column name="rule_id" type="int(11)" autoIncrement="true">
 				<constraints primaryKey="true" primaryKeyName="dataintegrity_rule_pk" nullable="false" />
@@ -52,7 +52,7 @@
 			<column name="uuid" type="char(38)"></column>
 		</createTable>
 	</changeSet>
-	<changeSet id="data-integrity-201607211113" author="jaya, deepak">
+	<changeSet id="data-integrity-201607221103" author="jaya, deepak">
 		<createTable tableName="dataintegrity_result" >
 			<column name="result_id" type="int(11)" autoIncrement="true">
 				<constraints primaryKey="true" primaryKeyName="dataintegrity_result_pk" nullable="false" />

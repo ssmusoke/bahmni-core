@@ -2,10 +2,9 @@ package org.bahmni.module.dataintegrity.scheduler;
 
 import java.util.Date;
 
+import org.bahmni.module.dataintegrity.rule.DataintegrityEvaluationService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.bahmni.module.dataintegrity.rule.DataintegrityEvaluationService;
-import org.bahmni.module.dataintegrity.rule.impl.DataintegrityEvaluationServiceImpl;
 import org.openmrs.api.context.Context;
 import org.openmrs.scheduler.tasks.AbstractTask;
 

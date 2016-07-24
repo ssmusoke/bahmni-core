@@ -1,9 +1,8 @@
 package org.bahmni.module.dataintegrity.rule;
 
-import org.bahmni.module.dataintegrity.db.DataintegrityResult;
 import org.bahmni.module.dataintegrity.db.DataintegrityRule;
 import org.bahmni.module.dataintegrity.rule.impl.PatientProgramRuleDefn;
-import org.openmrs.Patient;
+import org.bahmni.module.dataintegrity.db.DataintegrityResult;
 import org.openmrs.PatientProgram;
 
 import java.util.ArrayList;

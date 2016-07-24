@@ -1,8 +1,8 @@
 package org.bahmni.module.dataintegrity.rule.impl;
 
-import org.bahmni.module.dataintegrity.db.DataintegrityDAO;
-import org.bahmni.module.dataintegrity.rule.RuleResult;
 import org.bahmni.module.dataintegrity.rule.RuleDefn;
+import org.bahmni.module.dataintegrity.rule.RuleResult;
+import org.bahmni.module.dataintegrity.db.DataintegrityDAO;
 import org.openmrs.PatientProgram;
 import org.openmrs.api.context.Context;
 
