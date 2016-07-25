@@ -61,10 +61,8 @@
 				<constraints nullable="false"/>
 			</column>
 			<column name="patient_id" type="int(11)">
-				<constraints nullable="false"/>
 			</column>
 			<column name="patient_program_id" type="int(11)">
-				<constraints nullable="false"/>
 			</column>
 			<column name="action_url" type="varchar(500)"></column>
 			<column name="notes" type="varchar(500)"></column>

@@ -21,9 +21,13 @@ public class DataIntegrityTask extends AbstractTask {
     }
 
     public void execute() {
-        DataintegrityEvaluationService evaluationService = Context.getService(DataintegrityEvaluationService.class);
-        evaluationService.fireRules();
-        log.debug("executing hello world task");
+        try {
+            DataintegrityEvaluationService evaluationService = Context.getService(DataintegrityEvaluationService.class);
+            evaluationService.fireRules();
+            log.debug("executing DataIntegrityTask");
+        }catch (Exception e){
+            log.error("ERROR executing DataIntegrityTask : " + e.toString());
+        }
         super.startExecuting();
     }
 

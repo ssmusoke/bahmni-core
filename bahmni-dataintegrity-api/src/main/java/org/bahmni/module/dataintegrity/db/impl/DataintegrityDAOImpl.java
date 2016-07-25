@@ -82,8 +82,21 @@ public class DataintegrityDAOImpl implements DataintegrityDAO {
 
     @Override
     public void clearAllResults(){
-        sessionFactory.getCurrentSession()
-                .createSQLQuery("delete from dataintegrity_result where result_id > 0").executeUpdate();
+        final Session session = sessionFactory.openSession();
+        try {
+            final Transaction transaction = session.beginTransaction();
+            try {
+                session.createSQLQuery("delete from dataintegrity_result where result_id > 0").executeUpdate();
+                transaction.commit();
+                session.flush();
+            } catch (Exception ex) {
+                transaction.rollback();
+                throw ex;
+            }
+
+        } finally {
+            session.close();
+        }
     }
 
     public void setSessionFactory(SessionFactory sessionFactory) {

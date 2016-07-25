@@ -1,16 +1,11 @@
 package org.bahmni.module.dataintegrity.rule;
 
-import org.bahmni.module.dataintegrity.db.DataintegrityDAO;
 import org.bahmni.module.dataintegrity.db.DataintegrityResult;
 import org.bahmni.module.dataintegrity.db.DataintegrityRule;
 import org.bahmni.module.dataintegrity.rule.impl.PatientProgramRuleDefn;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.openmrs.PatientProgram;
-import org.openmrs.api.context.Context;
-import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.springframework.util.Assert;
 
@@ -66,7 +61,6 @@ public class RuleResultMapperTest {
         List<DataintegrityResult> diResults = null;
         PatientProgramRuleDefn patientProgramRuleDefn = mock(PatientProgramRuleDefn.class);
         when(patientProgramRuleDefn.evaluate()).thenReturn(null);
-        //PowerMockito.whenNew(PatientProgramRuleDefn.class).withNoArguments().thenReturn(null);
 
         DataintegrityRule rule = new DataintegrityRule();
         rule.setId(Integer.valueOf("1001"));
