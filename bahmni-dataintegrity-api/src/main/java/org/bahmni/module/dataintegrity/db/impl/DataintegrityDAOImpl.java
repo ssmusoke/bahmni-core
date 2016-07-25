@@ -83,7 +83,7 @@ public class DataintegrityDAOImpl implements DataintegrityDAO {
     @Override
     public void clearAllResults(){
         sessionFactory.getCurrentSession()
-                .createSQLQuery("delete from dataintegrity_result").executeUpdate();
+                .createSQLQuery("delete from dataintegrity_result where result_id > 0").executeUpdate();
     }
 
     public void setSessionFactory(SessionFactory sessionFactory) {
