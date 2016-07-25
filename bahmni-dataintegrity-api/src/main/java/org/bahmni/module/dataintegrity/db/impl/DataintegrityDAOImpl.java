@@ -27,9 +27,8 @@ public class DataintegrityDAOImpl implements DataintegrityDAO {
         StringBuilder queryString =
                 new StringBuilder("SELECT epp.patient_program_id as entity");
 
-        queryString.append((codedObs != null && codedObs.size() > 0 ? " , obs1.comments " : " NULL") + " AS notes ");
-        //TODO: get action url
-        queryString.append((codedObs != null && codedObs.size() > 0 ? " , obs1.comments " : " NULL ") + " AS actionUrl ");
+        queryString.append((codedObs != null && codedObs.size() > 0 ? " , obs1.comments " : " NULL ") + " AS notes ");
+        queryString.append( " NULL AS actionUrl ");
 
         queryString.append(
                 " FROM" +
@@ -49,7 +48,6 @@ public class DataintegrityDAOImpl implements DataintegrityDAO {
                 queryString.append(getObsQuery(obsConcept));
 
         queryString.append(" GROUP BY epp.patient_program_id");
-        queryString.append(" limit " + 10);
         Query queryToGetObs = sessionFactory.getCurrentSession().createSQLQuery(queryString.toString());
 
         if(drugsList!=null && drugsList.size() > 0)
@@ -61,13 +59,14 @@ public class DataintegrityDAOImpl implements DataintegrityDAO {
     private String getObsQuery(Entry<String, List<String>> obsConcept) {
         String concpetValues = StringUtils.join(obsConcept.getValue(), "','");
         return "   INNER JOIN (" +
-        "   SELECT  o.comments, o.encounter_id, o.uuid " +
+        "   SELECT  o.comments, ee.episode_id, o.uuid " +
         "   FROM    obs o" +
         "           JOIN concept_view cv ON     o.concept_id = cv.concept_id AND o.voided = 0 AND" +
         "                                       cv.concept_full_name = '" + obsConcept.getKey() + "'" +
+        "           JOIN episode_encounter ee ON   o.encounter_id = ee.encounter_id " +
         "           JOIN concept_view cv_value ON   o.value_coded = cv_value.concept_id  AND " +
         "                                           cv_value.concept_full_name IN ('" + concpetValues + "') " +
-        "   ) obs1 ON obs1.encounter_id = ee.encounter_id"; //TODO: modify for multiple obs
+        "   ) obs1 ON obs1.episode_id = ee.episode_id"; //TODO: modify for multiple obs
     }
 
     @Override
