@@ -6,8 +6,7 @@ import org.openmrs.PatientProgram;
 import java.util.List;
 import java.util.Map;
 
-    public interface DataintegrityDAO {
-    List<RuleResult<PatientProgram>> getAllByObsAndDrugs(List<String> drugsList, Map<String, List<String>> codedObs);
+    public interface DataintegrityDao {
 
         List<DataintegrityRule> getRules();
 

@@ -6,7 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 
-public class DataintegrityDAOImplTest {
+public class DataintegrityDaoImplTest {
     @Before
     public void setUp() throws Exception {
 

@@ -10,8 +10,8 @@
     <context:component-scan base-package="org.bahmni.module.dataintegrity"/>
 
     <bean name="DataintegrityEvaluationService" class="org.bahmni.module.dataintegrity.rule.impl.DataintegrityEvaluationServiceImpl">
-        <property name="dataintegrityDAO">
-            <bean class="org.bahmni.module.dataintegrity.db.impl.DataintegrityDAOImpl">
+        <property name="dataintegrityDao">
+            <bean class="org.bahmni.module.dataintegrity.db.impl.DataintegrityDaoImpl">
                 <property name="sessionFactory">
                     <ref bean="sessionFactory" />
                 </property>
@@ -42,31 +42,4 @@
         </property>
     </bean>
 
-    <bean parent="serviceContext">
-        <property name="moduleService">
-            <list>
-                <value>org.bahmni.module.dataintegrity.db.DataintegrityDAO</value>
-                <ref local="dao"/>
-            </list>
-        </property>
-    </bean>
-
-    <bean id="dataintegrityDAO" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-        <property name="transactionManager">
-            <ref bean="transactionManager"/>
-        </property>
-        <property name="target" ref="DataintegrityDAO"></property>
-        <property name="preInterceptors">
-            <ref bean="serviceInterceptors"/>
-        </property>
-        <property name="transactionAttributeSource">
-            <ref bean="transactionAttributeSource"/>
-        </property>
-    </bean>
-
-    <bean id="dao" class="org.bahmni.module.dataintegrity.db.impl.DataintegrityDAOImpl">
-        <property name="sessionFactory">
-            <ref bean="sessionFactory" />
-        </property>
-    </bean>
 </beans>
