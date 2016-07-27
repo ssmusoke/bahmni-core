@@ -1,17 +1,15 @@
 package org.bahmni.module.dataintegrity.db.impl;
 
-import org.bahmni.module.dataintegrity.db.DataintegrityDao;
+import org.bahmni.module.dataintegrity.db.DataintegrityDAO;
 import org.bahmni.module.dataintegrity.db.DataintegrityResult;
 import org.bahmni.module.dataintegrity.db.DataintegrityRule;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
-import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.List;
 
-@Component("DataintegrityDAO")
-public class DataintegrityDaoImpl implements DataintegrityDao {
+public class DataintegrityDAOImpl implements DataintegrityDAO {
 
     private SessionFactory sessionFactory;
 

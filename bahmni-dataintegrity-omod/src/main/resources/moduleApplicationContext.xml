@@ -10,12 +10,14 @@
     <context:component-scan base-package="org.bahmni.module.dataintegrity"/>
 
     <bean name="DataintegrityEvaluationService" class="org.bahmni.module.dataintegrity.rule.impl.DataintegrityEvaluationServiceImpl">
-        <property name="dataintegrityDao">
-            <bean class="org.bahmni.module.dataintegrity.db.impl.DataintegrityDaoImpl">
-                <property name="sessionFactory">
-                    <ref bean="sessionFactory" />
-                </property>
-            </bean>
+        <constructor-arg name="dataintegrityDao" ref="dataintegrityDAO"></constructor-arg>
+        <constructor-arg name="ruleDefnLoader" ref="ruleDefnLoader"></constructor-arg>
+        <constructor-arg name="ruleResultMapper" ref="ruleResultMapper"></constructor-arg>
+    </bean>
+
+    <bean id="dataintegrityDAO" class="org.bahmni.module.dataintegrity.db.impl.DataintegrityDAOImpl">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory" />
         </property>
     </bean>
 

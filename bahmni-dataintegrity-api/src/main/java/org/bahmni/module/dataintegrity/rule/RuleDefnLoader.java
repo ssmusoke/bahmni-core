@@ -1,43 +1,40 @@
 package org.bahmni.module.dataintegrity.rule;
 
 import org.bahmni.module.dataintegrity.db.DataintegrityRule;
-import org.openmrs.util.OpenmrsClassLoader;
+import org.openmrs.api.context.Context;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RuleDefnLoader<T> {
+@Component
+public class RuleDefnLoader {
 
-    public Map<DataintegrityRule, RuleDefn<T>> getRuleDefns(List<DataintegrityRule> dataintegrityRules) {
-        Map<DataintegrityRule, RuleDefn<T>> rulesWithDefn = new HashMap<>();
+    public Map<DataintegrityRule, RuleDefn> getRuleDefns(List<DataintegrityRule> dataintegrityRules) {
+        Map<DataintegrityRule, RuleDefn> rulesWithDefn = new HashMap<>();
 
         for (DataintegrityRule rule : dataintegrityRules){
-            RuleDefn<T> ruleDefn = null;
 
-            if("java".equals(rule.getRuleType())){
-                ruleDefn = getJavaRuleInstance(rule.getRuleCode());
+            if(!"java".equals(rule.getRuleType())){
+                throw new IllegalArgumentException("The rule type ["+ rule.getRuleType()+"] is not supported");
             }
-            /*
-            else if("groovy".equals(rule.getRuleType())){
-            }
-            else if("sql".equals(rule.getRuleType())){
-            }*/
 
-            if(ruleDefn != null) rulesWithDefn.put(rule, ruleDefn);
+            RuleDefn ruleDefn = getJavaRuleInstance(rule.getRuleCode());
+
+            if(ruleDefn != null) {
+                rulesWithDefn.put(rule, ruleDefn);
+            }
         }
         return rulesWithDefn;
     }
 
-    private RuleDefn<T> getJavaRuleInstance(String ruleCode) {
-        RuleDefn<T> ruleDefn = null;
+    private RuleDefn getJavaRuleInstance(String ruleCode) {
+        RuleDefn ruleDefn = null;
         try {
-            Class<?> ruleClass = OpenmrsClassLoader.getInstance().loadClass(ruleCode, false);
+            Class<?> ruleClass = Context.loadClass(ruleCode);
             Object o = ruleClass.newInstance();
-            ruleDefn = (RuleDefn<T>) o;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            //log
+            ruleDefn = (RuleDefn) o;
         } catch (Exception e) {
             e.printStackTrace();
             //log
