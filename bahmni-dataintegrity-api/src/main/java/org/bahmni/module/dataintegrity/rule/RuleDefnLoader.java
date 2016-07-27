@@ -32,7 +32,7 @@ public class RuleDefnLoader<T> {
     private RuleDefn<T> getJavaRuleInstance(String ruleCode) {
         RuleDefn<T> ruleDefn = null;
         try {
-            Class<?> ruleClass = OpenmrsClassLoader.getInstance().loadClass(ruleCode);
+            Class<?> ruleClass = OpenmrsClassLoader.getInstance().loadClass(ruleCode, false);
             Object o = ruleClass.newInstance();
             ruleDefn = (RuleDefn<T>) o;
         } catch (ClassNotFoundException e) {

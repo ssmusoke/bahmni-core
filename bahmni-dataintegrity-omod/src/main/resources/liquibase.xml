@@ -93,44 +93,4 @@
 								 referencedColumnNames="rule_id"></addForeignKeyConstraint>
 
 	</changeSet>
-	<changeSet id="data-integrity-201607221053" author="jaya">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">SELECT count(*) from dataintegrity_rule where rule_name='JavaRuleExample'</sqlCheck>
-		</preConditions>
-		<comment>Add Java Rule Example to Data Integrity Rule</comment>
-		<insert tableName="dataintegrity_rule">
-			<column name="rule_name" value="JavaRuleExample"/>
-			<column name="rule_category" value="java"/>
-			<column name="rule_type" value="java"/>
-			<column name="rule_code" value="org.bahmni.module.dataintegrity.rule.impl.JavaRuleExample"/>
-			<column name="uuid" valueComputed="uuid()"/>
-		</insert>
-	</changeSet>
-	<changeSet id="data-integrity-201607221054" author="jaya">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">SELECT count(*) from dataintegrity_rule where rule_name='Drug Consent'</sqlCheck>
-		</preConditions>
-		<comment>Add Drug Consent Rule to Data Integrity Rule</comment>
-		<insert tableName="dataintegrity_rule">
-			<column name="rule_name" value="Drug Consent"/>
-			<column name="rule_category" value="java"/>
-			<column name="rule_type" value="java"/>
-			<column name="rule_code" value="org.bahmni.module.dataintegrity.rule.impl.DrugConsent"/>
-			<column name="uuid" valueComputed="uuid()"/>
-		</insert>
-	</changeSet>
-	<changeSet id="data-integrity-201607221055" author="jaya">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">SELECT count(*) from dataintegrity_rule where rule_name='EndTB Drug Consent'</sqlCheck>
-		</preConditions>
-		<comment>Add EndTB Drug Consent Rule to Data Integrity Rule</comment>
-		<insert tableName="dataintegrity_rule">
-			<column name="rule_name" value="EndTB Drug Consent"/>
-			<column name="rule_category" value="java"/>
-			<column name="rule_type" value="java"/>
-			<column name="rule_code" value="org.bahmni.module.dataintegrity.rule.impl.EndTBDrugConsent"/>
-			<column name="uuid" valueComputed="uuid()"/>
-		</insert>
-	</changeSet>
-
 </databaseChangeLog>

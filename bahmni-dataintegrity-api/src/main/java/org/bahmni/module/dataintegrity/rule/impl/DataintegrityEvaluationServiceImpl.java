@@ -1,5 +1,7 @@
 package org.bahmni.module.dataintegrity.rule.impl;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.bahmni.module.dataintegrity.rule.DataintegrityEvaluationService;
 import org.bahmni.module.dataintegrity.rule.RuleDefn;
 import org.bahmni.module.dataintegrity.rule.RuleDefnLoader;
@@ -10,14 +12,17 @@ import org.bahmni.module.dataintegrity.db.DataintegrityRule;
 import org.bahmni.module.dataintegrity.rule.RuleResultMapper;
 import org.springframework.stereotype.Component;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import static org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace;
+
 @Component("DataintegrityEvaluationService")
 public class DataintegrityEvaluationServiceImpl<T> implements DataintegrityEvaluationService<T> {
-
+    private static Log log = LogFactory.getLog(DataintegrityEvaluationServiceImpl.class);
     private DataintegrityDao dataintegrityDao;
 
     @Override
@@ -30,9 +35,13 @@ public class DataintegrityEvaluationServiceImpl<T> implements DataintegrityEvalu
         Map<DataintegrityRule, RuleDefn<T>> rulesWithDefns = loadRuleDefns();
 
         for (Entry<DataintegrityRule, RuleDefn<T>> ruleWithDefn : rulesWithDefns.entrySet()) {
-            List<RuleResult<T>> ruleResults = ruleWithDefn.getValue().evaluate();
-
-            results.addAll(resultMapper.getDataintegrityResults(ruleWithDefn, ruleResults));
+            try {
+                List<RuleResult<T>> ruleResults = ruleWithDefn.getValue().evaluate();
+                results.addAll(resultMapper.getDataintegrityResults(ruleWithDefn, ruleResults));
+            }catch (Exception e){
+                log.error(MessageFormat.format("ERROR executing DataIntegrity Rule : {0} with follwoing Exception - {1}{2}",
+                        ruleWithDefn.getKey().getRuleCode(), e.toString(), getStackTrace(e)));
+            }
         }
         dataintegrityDao.saveResults(results);
 
