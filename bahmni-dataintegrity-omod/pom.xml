@@ -76,7 +76,7 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>org.openmrs.module</groupId>
+            <groupId>org.bahmni.module</groupId>
             <artifactId>bahmni-dataintegrity-api</artifactId>
             <version>${project.version}</version>
         </dependency>
