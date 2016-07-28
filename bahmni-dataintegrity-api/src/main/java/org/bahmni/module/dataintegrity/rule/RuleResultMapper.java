@@ -1,5 +1,6 @@
 package org.bahmni.module.dataintegrity.rule;
 
+import org.bahmni.module.dataintegrity.DataIntegrityException;
 import org.bahmni.module.dataintegrity.db.DataintegrityResult;
 import org.bahmni.module.dataintegrity.db.DataintegrityRule;
 import org.openmrs.PatientProgram;

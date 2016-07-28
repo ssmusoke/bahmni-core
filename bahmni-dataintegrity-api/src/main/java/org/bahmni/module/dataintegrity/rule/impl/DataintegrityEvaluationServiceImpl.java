@@ -45,15 +45,17 @@ public class DataintegrityEvaluationServiceImpl implements DataintegrityEvaluati
 
         for (Entry<DataintegrityRule, RuleDefn> ruleWithDefn : rulesWithDefns.entrySet()) {
             try {
+
                 List<RuleResult> ruleResults = ruleWithDefn.getValue().evaluate();
                 results.addAll(ruleResultMapper.getDataintegrityResults(ruleWithDefn, ruleResults));
+
             }catch (Exception e){
-                log.error(MessageFormat.format("ERROR executing DataIntegrity Rule : {0} with follwoing Exception - {1}{2}",
-                        ruleWithDefn.getKey().getRuleCode(), e.toString(), getStackTrace(e)));
+                log.error(MessageFormat.format(
+                        "ERROR executing DataIntegrity Rule : {0} with follwoing Exception - {1}{2}",
+                            ruleWithDefn.getKey().getRuleCode(), e.toString(), getStackTrace(e)));
             }
         }
         dataintegrityDao.saveResults(results);
-
     }
     private Map<DataintegrityRule, RuleDefn> loadRuleDefns() {
         List<DataintegrityRule> diRules = dataintegrityDao.getRules();

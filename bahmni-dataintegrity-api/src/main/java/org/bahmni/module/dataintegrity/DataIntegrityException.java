@@ -1,4 +1,4 @@
-package org.bahmni.module.dataintegrity.rule;
+package org.bahmni.module.dataintegrity;
 
 public class DataIntegrityException extends RuntimeException{
 
