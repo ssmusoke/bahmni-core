@@ -28,28 +28,6 @@ public class RuleResultMapperTest {
     }
 
     @Test
-    public void shouldReturnDIResultForOneRule() throws Exception {
-        List diResults = null;
-        DataintegrityRule rule = new DataintegrityRule();
-        rule.setId(Integer.valueOf("1001"));
-        rule.setRuleName("TestRule");
-
-        rulesMap.put(rule, new RuleDefn() {
-            @Override
-            public List<RuleResult> evaluate() {
-                return null;
-            }
-        });
-        resultMapper = new RuleResultMapper();
-        inputresult.add( new RuleResult());
-        for(Entry<DataintegrityRule, RuleDefn> ruleEntry : rulesMap.entrySet())
-            diResults = resultMapper.getDataintegrityResults(ruleEntry, inputresult);
-
-        Assert.notNull(diResults);
-        Assert.isTrue(diResults.size() == 1);
-    }
-
-    @Test
     public void shouldNotThrowExceptionForEmptyRulesList() throws Exception {
 
         List diResults = null;

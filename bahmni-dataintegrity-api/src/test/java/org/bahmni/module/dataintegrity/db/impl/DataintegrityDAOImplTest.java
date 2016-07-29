@@ -5,8 +5,5 @@ import org.junit.Test;
 
 
 public class DataintegrityDAOImplTest {
-    @Before
-    public void setUp() throws Exception {
 
-    }
 }

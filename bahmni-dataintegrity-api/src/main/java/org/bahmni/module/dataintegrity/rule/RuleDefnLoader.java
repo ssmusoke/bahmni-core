@@ -1,5 +1,6 @@
 package org.bahmni.module.dataintegrity.rule;
 
+import org.bahmni.module.dataintegrity.DataIntegrityException;
 import org.bahmni.module.dataintegrity.db.DataintegrityRule;
 import org.openmrs.api.context.Context;
 import org.springframework.stereotype.Component;
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace;
 
 @Component
 public class RuleDefnLoader {
@@ -36,8 +39,7 @@ public class RuleDefnLoader {
             Object o = ruleClass.newInstance();
             ruleDefn = (RuleDefn) o;
         } catch (Exception e) {
-            e.printStackTrace();
-            //log
+            throw new DataIntegrityException("Failed to load java rule" + getStackTrace(e));
         }
         return ruleDefn;
     }

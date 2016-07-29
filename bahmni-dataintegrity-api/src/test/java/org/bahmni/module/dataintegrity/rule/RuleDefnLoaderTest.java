@@ -11,7 +11,7 @@ public class RuleDefnLoaderTest {
 	public void ensureRuleDefinitionsAreLoaded(){
 
 
-		RuleDefnLoader loader = new RuleDefnLoader();
+//		RuleDefnLoader loader = new RuleDefnLoader();
 //		loader.getRuleDefns(dataintegrityRules);
 
 	}
