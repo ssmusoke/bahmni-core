@@ -19,11 +19,11 @@ public class RuleDefnLoader {
 
         for (DataintegrityRule rule : dataintegrityRules){
 
-            if(!"java".equals(rule.getRuleType())){
-                throw new IllegalArgumentException("The rule type ["+ rule.getRuleType()+"] is not supported");
+            if(!"java".equals(rule.getHandlerConfig())){
+                throw new IllegalArgumentException("The rule type ["+ rule.getHandlerConfig()+"] is not supported");
             }
 
-            RuleDefn ruleDefn = getJavaRuleInstance(rule.getRuleCode());
+            RuleDefn ruleDefn = getJavaRuleInstance(rule.getHandlerClassname());
 
             if(ruleDefn != null) {
                 rulesWithDefn.put(rule, ruleDefn);

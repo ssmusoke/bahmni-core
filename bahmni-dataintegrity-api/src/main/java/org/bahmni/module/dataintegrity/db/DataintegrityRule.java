@@ -8,8 +8,8 @@ public class DataintegrityRule extends BaseOpenmrsObject implements Serializable
     private int ruleId;
     private String ruleName;
     private String ruleCategory;
-    private String ruleType;
-    private String ruleCode;
+    private String handlerConfig;
+    private String handlerClassname;
 
 
     public int getRuleId() {
@@ -36,20 +36,20 @@ public class DataintegrityRule extends BaseOpenmrsObject implements Serializable
         this.ruleCategory = ruleCategory;
     }
 
-    public String getRuleType() {
-        return ruleType;
+    public String getHandlerConfig() {
+        return handlerConfig;
     }
 
-    public void setRuleType(String ruleType) {
-        this.ruleType = ruleType;
+    public void setHandlerConfig(String handlerConfig) {
+        this.handlerConfig = handlerConfig;
     }
 
-    public String getRuleCode() {
-        return ruleCode;
+    public String getHandlerClassname() {
+        return handlerClassname;
     }
 
-    public void setRuleCode(String ruleCode) {
-        this.ruleCode = ruleCode;
+    public void setHandlerClassname(String handlerClassname) {
+        this.handlerClassname = handlerClassname;
     }
 
 

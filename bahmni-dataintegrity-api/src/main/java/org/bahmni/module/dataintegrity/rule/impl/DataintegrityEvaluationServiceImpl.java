@@ -52,7 +52,7 @@ public class DataintegrityEvaluationServiceImpl implements DataintegrityEvaluati
             }catch (Exception e){
                 log.error(MessageFormat.format(
                         "ERROR executing DataIntegrity Rule : {0} with follwoing Exception - {1}{2}",
-                            ruleWithDefn.getKey().getRuleCode(), e.toString(), getStackTrace(e)));
+                            ruleWithDefn.getKey().getHandlerClassname(), e.toString(), getStackTrace(e)));
             }
         }
         dataintegrityDao.saveResults(results);
