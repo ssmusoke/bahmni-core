@@ -1,5 +1,11 @@
 package org.bahmni.module.dataintegrity.rule;
 
+import org.bahmni.module.dataintegrity.db.DataintegrityRule;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class RuleDefnLoaderTest {
@@ -8,12 +14,13 @@ public class RuleDefnLoaderTest {
 		initMocks(this);
 	}
 
-	public void ensureRuleDefinitionsAreLoaded(){
+	@Test(expected = IllegalArgumentException.class)
+	public void ensureThrowsExecptionForEmptyRuleDefinition(){
 
-
-//		RuleDefnLoader loader = new RuleDefnLoader();
-//		loader.getRuleDefns(dataintegrityRules);
-
+		RuleDefnLoader loader = new RuleDefnLoader();
+		List<DataintegrityRule> dataintegrityRules = new ArrayList<>();
+		dataintegrityRules.add(new DataintegrityRule());
+		loader.getRuleDefns(dataintegrityRules);
 	}
 
 }
