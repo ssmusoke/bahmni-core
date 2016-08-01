@@ -33,12 +33,12 @@
 				<constraints primaryKey="true" primaryKeyName="dataintegrity_rule_pk" nullable="false" />
 			</column>
 
-			<column name="rule_name" type="varchar(45)"></column>
+			<column name="rule_name" type="varchar(200)"></column>
 			<column name="rule_category" type="varchar(45)"></column>
-			<column name="rule_type" type="varchar(45)">
+			<column name="handler_config" type="varchar(45)">
 				<constraints nullable="false"/>
 			</column>
-			<column name="rule_code" type="varchar(500)">
+			<column name="handler_classname" type="varchar(200)">
 				<constraints nullable="false"/>
 			</column>
 			<column name="creator" type="int(11)"></column>
