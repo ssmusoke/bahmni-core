@@ -23,7 +23,7 @@ import java.util.List;
 public class BahmniProgramWorkflowServiceImpl extends ProgramWorkflowServiceImpl implements BahmniProgramWorkflowService {
 
     @Autowired
-    EpisodeService episodeService;
+    private EpisodeService episodeService;
 
     public BahmniProgramWorkflowServiceImpl(BahmniProgramWorkflowDAO programWorkflowDAO, EpisodeService episodeService) {
         this.episodeService = episodeService;
@@ -79,6 +79,11 @@ public class BahmniProgramWorkflowServiceImpl extends ProgramWorkflowServiceImpl
         BahmniPatientProgram bahmniPatientProgram = (BahmniPatientProgram)super.savePatientProgram(patientProgram);
         createEpisodeIfRequired(bahmniPatientProgram);
         return bahmniPatientProgram;
+    }
+
+    @Override
+    public List<BahmniPatientProgram> getPatientProgramByAttributeNameAndValue(String attributeName, String attributeValue) {
+        return ((BahmniProgramWorkflowDAO)dao).getPatientProgramByAttributeNameAndValue(attributeName, attributeValue);
     }
 
     private void createEpisodeIfRequired(BahmniPatientProgram bahmniPatientProgram) {
