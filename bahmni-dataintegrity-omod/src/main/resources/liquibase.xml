@@ -5,11 +5,11 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
-	<changeSet id="data-integrity-201607221101" author="jaya, deepak" dbms="mysql">
+	<changeSet id="data-integrity-201608031101" author="jaya, deepak" dbms="mysql">
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">
 				SELECT COUNT(*) FROM scheduler_task_config
-				WHERE schedulable_class = 'org.bahmni.module.DataIntegrityTask'
+				WHERE schedulable_class = 'org.bahmni.module.dataintegrity.scheduler.DataIntegrityTask'
 				And name = 'Data Integrity Task'
 			</sqlCheck>
 		</preConditions>
@@ -23,7 +23,7 @@
 			<column name="repeat_interval" value="86400" />
 			<column name="date_created" valueDate="CURRENT_TIMESTAMP" />
 			<column name="created_by" value="1" />
-			<column name="uuid" value="8c17b376-1a2b-11e1-a51a-00248140a5eb" />
+			<column name="uuid" value="uuid()" />
 		</insert>
 	</changeSet>
 
