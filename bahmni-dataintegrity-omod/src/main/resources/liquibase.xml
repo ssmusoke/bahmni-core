@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
-	<changeSet id="data-integrity-201608041101" author="jaya, deepak" dbms="mysql">
+	<changeSet id="data-integrity-201608041110" author="jaya, deepak" dbms="mysql">
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">
 				SELECT COUNT(*) FROM scheduler_task_config
@@ -19,10 +19,12 @@
 			<column name="description" value="runs all integrity rules" />
 			<column name="schedulable_class" value="org.bahmni.module.dataintegrity.scheduler.DataIntegrityTask" />
 			<column name="start_time_pattern" value="MM/dd/yyyy HH:mm:ss" />
-			<column name="start_time" valueDate="2011-11-28T23:59:59" />
+			<column name="start_time" valueDate="now()" />
 			<column name="repeat_interval" value="86400" />
 			<column name="date_created" valueDate="CURRENT_TIMESTAMP" />
 			<column name="created_by" value="1" />
+			<column name="start_on_startup" value="1"/>
+			<column name="started" value="1"/>
 			<column name="uuid" valueComputed="uuid()" />
 		</insert>
 	</changeSet>
