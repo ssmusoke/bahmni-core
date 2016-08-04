@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
-	<changeSet id="data-integrity-201608031101" author="jaya, deepak" dbms="mysql">
+	<changeSet id="data-integrity-201608041101" author="jaya, deepak" dbms="mysql">
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">
 				SELECT COUNT(*) FROM scheduler_task_config
@@ -23,7 +23,7 @@
 			<column name="repeat_interval" value="86400" />
 			<column name="date_created" valueDate="CURRENT_TIMESTAMP" />
 			<column name="created_by" value="1" />
-			<column name="uuid" value="uuid()" />
+			<column name="uuid" valueComputed="uuid()" />
 		</insert>
 	</changeSet>
 
